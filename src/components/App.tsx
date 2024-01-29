@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from "../components/Home.tsx";
 import Tags from "../components/Tags.tsx";
+import CreateAccount from "../components/CreateAccount.tsx";
 import {
   AppBar,
   Toolbar,
@@ -31,14 +32,14 @@ export const App = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!token && location.pathname !== "/login") {
+    if (!token && !['/login', '/create-account'].includes(location.pathname)) {
       navigate("/login");
     }
   }, [navigate, location.pathname, token]);
 
   return (
     <>
-      {location.pathname !== "/login" && (
+      {!['/login', '/create-account'].includes(location.pathname) && (
         <AppBar position="static" sx={{ mb: 2 }}>
           <Toolbar>
             <Button color="inherit" component={Link} to="/home">
@@ -76,6 +77,7 @@ export const App = () => {
         <Route path="/tags" element={<Tags />} />
         <Route path="/connections" element={<Connections />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create-account" element={<CreateAccount />} />
       </Routes>
     </>
   );

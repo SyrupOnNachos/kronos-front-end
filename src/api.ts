@@ -41,6 +41,13 @@ export const api = createApi({
         body,
       }),
     }),
+    createLogin: builder.mutation<LoginResponse, LoginRequest>({
+      query: (body) => ({
+        url: "users",
+        method: "POST",
+        body,
+      }),
+    }),
     getConnections: builder.query<Connections[], void>({
       query: () => "connections",
     }),
@@ -61,4 +68,5 @@ export const {
   useLogoutMutation,
   useGetConnectionsQuery,
   useDeleteConnectionMutation,
+  useCreateLoginMutation
 } = api;
